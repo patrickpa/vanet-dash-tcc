@@ -1,0 +1,319 @@
+file 76956 1538164832                                           
+version 2
+run WirelessDASH-0-20180928-17:00:28-6572
+attr configname WirelessDASH
+attr datetime 20180928-17:00:28
+attr experiment WirelessDASH
+attr inifile omnetpp.ini
+attr iterationvars "$0=normal(3mps, 0.5mps)"
+attr iterationvarsf normal(3mps,_0.5mps)-
+attr measurement "$0=normal(3mps, 0.5mps)"
+attr network Net
+attr processid 6572
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+param **.tcpType "\"TCP\""
+param *.hostA.numTcpApps 1
+param *.hostA.tcpApp[0].typename "\"TCPGenericSrvApp\""
+param *.hostA.tcpApp[0].localPort 5001
+param *.hostB.numTcpApps 1
+param *.hostB.tcpApp[0].typename "\"TCPVideoStreamCliApp\""
+param *.hostB.tcpApp[0].connectPort 5001
+param *.hostB.tcpApp[0].connectAddress "\"hostA\""
+param *.hostB.tcpApp[0].dataTransferMode "\"object\""
+param *.hostB.tcpApp[0].numRequestsPerSession 1000
+param *.hostB.tcpApp[0].idleInterval 0s
+param *.hostB.tcpApp[0].startTime 0s
+param *.hostB.tcpApp[0].video_duration 1000
+param *.hostB.tcpApp[0].thinkTime 0s
+param *.host*.**.bitrate 10Mbps
+param *.numHosts 5
+param *.host*.**.bitrate 1Mbps
+param *.host*.wlan[0].radio.transmitter.communicationRange 200m
+param *.visualizer.physicalLinkVisualizer.displayLinks true
+param *.visualizer.dataLinkVisualizer.displayLinks true
+param *.visualizer.networkRouteVisualizer.displayRoutes true
+param *.visualizer.*LinkVisualizer.lineShift 0
+param *.visualizer.networkRouteVisualizer.lineShift 0
+param *.visualizer.mobilityVisualizer.displayVelocities true
+param *.visualizer.mobilityVisualizer.displayMovementTrails true
+param *.visualizer.mediumVisualizer.displaySignals false
+param *.host*.wlan[0].radio.receiver.ignoreInterference true
+param *.hostA.wlan[0].radio.displayInterferenceRange true
+param *.host*.wlan[0].typename "\"WirelessNic\""
+param *.host*.wlan[0].radioType "\"IdealRadio\""
+param *.host*.wlan[0].macType "\"CsmaCaMac\""
+param *.host*.wlan[0].mac.useAck true
+param *.host*.wlan[0].radio.displayInterferenceRange false
+param *.hostR*.wlan[0].radio.displayCommunicationRange false
+param *.host*.wlan[0].radio.energyConsumerType "\"StateBasedEpEnergyConsumer\""
+param *.host*.wlan[0].radio.energyConsumer.offPowerConsumption 0mW
+param *.host*.wlan[0].radio.energyConsumer.sleepPowerConsumption 1mW
+param *.host*.wlan[0].radio.energyConsumer.switchingPowerConsumption 1mW
+param *.host*.wlan[0].radio.energyConsumer.receiverIdlePowerConsumption 2mW
+param *.host*.wlan[0].radio.energyConsumer.receiverBusyPowerConsumption 5mW
+param *.host*.wlan[0].radio.energyConsumer.receiverReceivingPowerConsumption 10mW
+param *.host*.wlan[0].radio.energyConsumer.transmitterIdlePowerConsumption 2mW
+param *.host*.wlan[0].radio.energyConsumer.transmitterTransmittingPowerConsumption 100mW
+param *.host*.energyStorageType "\"IdealEpEnergyStorage\""
+param *.host*.mobilityType "\"MassMobility\""
+param **.host*.mobility.speed "normal(3mps, 0.5mps)"
+param **.host*.mobility.changeAngleBy "normal(0deg, 30deg)"
+param **.host*.mobility.changeInterval "normal(5s, 0.1s)"
+param **.mobility.constraintAreaMinZ 0m
+param **.mobility.constraintAreaMaxZ 0m
+param **.mobility.constraintAreaMinX 0m
+param **.mobility.constraintAreaMinY 0m
+param **.mobility.constraintAreaMaxX 1000m
+param **.mobility.constraintAreaMaxY 700m
+param *.host*.routingTable.netmaskRoutes "\"\""
+param *.configurator.config "xml(\"<config><interface hosts='**' address='10.0.0.x' netmask='255.255.255.0'/><autoroute metric='errorRate'/></config>\")"
+param *.configurator.optimizeRoutes false
+param *.configurator.addStaticRoutes false
+param *.hostType "\"AODVRouter\""
+param *.hostB.wlan[0].radio.displayCommunicationRange true
+param *.visualizer.dataLinkVisualizer.packetFilter "\"AODV*\""
+
+vector 0 Net.hostA.energyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity, vector"
+vector 1 Net.hostA.energyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr source powerConsumptionChanged
+attr title "Power consumption, vector"
+vector 2 Net.hostB.energyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity, vector"
+vector 3 Net.hostB.energyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr source powerConsumptionChanged
+attr title "Power consumption, vector"
+vector 4 Net.hostR[0].energyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity, vector"
+vector 5 Net.hostR[0].energyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr source powerConsumptionChanged
+attr title "Power consumption, vector"
+vector 6 Net.hostR[1].energyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity, vector"
+vector 7 Net.hostR[1].energyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr source powerConsumptionChanged
+attr title "Power consumption, vector"
+vector 8 Net.hostR[2].energyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity, vector"
+vector 9 Net.hostR[2].energyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr source powerConsumptionChanged
+attr title "Power consumption, vector"
+vector 10 Net.hostR[3].energyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity, vector"
+vector 11 Net.hostR[3].energyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr source powerConsumptionChanged
+attr title "Power consumption, vector"
+vector 12 Net.hostR[4].energyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity, vector"
+vector 13 Net.hostR[4].energyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr source powerConsumptionChanged
+attr title "Power consumption, vector"
+vector 14 Net.hostA.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr source radioModeChanged
+attr title "Radio mode, vector"
+vector 15 Net.hostA.wlan[0].radio.energyConsumer powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr source powerConsumptionChanged
+attr title "Power consumption, vector"
+vector 16 Net.hostB.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr source radioModeChanged
+attr title "Radio mode, vector"
+vector 17 Net.hostB.wlan[0].radio.energyConsumer powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr source powerConsumptionChanged
+attr title "Power consumption, vector"
+vector 18 Net.hostB.tcpApp[0] DASHBufferLength:vector ETV
+attr title "Video buffer length (in seconds), vector"
+vector 19 Net.hostB.tcpApp[0] DASHVideoPlaybackPointer:vector ETV
+attr title "Video playback pointer, vector"
+vector 20 Net.hostB.tcpApp[0] DASHQualityLevel:vector ETV
+attr title "Requested quality level, vector"
+vector 21 Net.hostR[0].wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr source radioModeChanged
+attr title "Radio mode, vector"
+vector 22 Net.hostR[0].wlan[0].radio.energyConsumer powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr source powerConsumptionChanged
+attr title "Power consumption, vector"
+vector 23 Net.hostR[1].wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr source radioModeChanged
+attr title "Radio mode, vector"
+vector 24 Net.hostR[1].wlan[0].radio.energyConsumer powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr source powerConsumptionChanged
+attr title "Power consumption, vector"
+vector 25 Net.hostR[2].wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr source radioModeChanged
+attr title "Radio mode, vector"
+vector 26 Net.hostR[2].wlan[0].radio.energyConsumer powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr source powerConsumptionChanged
+attr title "Power consumption, vector"
+vector 27 Net.hostR[3].wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr source radioModeChanged
+attr title "Radio mode, vector"
+vector 28 Net.hostR[3].wlan[0].radio.energyConsumer powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr source powerConsumptionChanged
+attr title "Power consumption, vector"
+vector 29 Net.hostR[4].wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr source radioModeChanged
+attr title "Radio mode, vector"
+vector 30 Net.hostR[4].wlan[0].radio.energyConsumer powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr source powerConsumptionChanged
+attr title "Power consumption, vector"
+vector 31 Net.hostA.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr source receptionStateChanged
+attr title "Radio reception state, vector"
+vector 32 Net.hostB.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr source receptionStateChanged
+attr title "Radio reception state, vector"
+vector 33 Net.hostR[0].wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr source receptionStateChanged
+attr title "Radio reception state, vector"
+vector 34 Net.hostR[1].wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr source receptionStateChanged
+attr title "Radio reception state, vector"
+vector 35 Net.hostR[2].wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr source receptionStateChanged
+attr title "Radio reception state, vector"
+vector 36 Net.hostR[3].wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr source receptionStateChanged
+attr title "Radio reception state, vector"
+vector 37 Net.hostR[4].wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr source receptionStateChanged
+attr title "Radio reception state, vector"
+vector 38 Net.hostB.tcpApp[0] DASHVideoPlaybackStatus:vector ETV
+attr title "Video playback status (playing=1, buffering=0), vector"
+vector 39 Net.hostB.tcpApp[0] numActiveSessions:vector ETV
+attr interpolationmode sample-hold
+attr source sum(connect)
+attr title "number of active sessions, vector"
+vector 40 Net.hostB.tcp tcpRcvQueueBytes ETV
+vector 41 Net.hostB.tcp "advertised window" ETV
+vector 42 Net.hostB.tcp "receive window" ETV
+vector 43 Net.hostB.tcp "sent ack" ETV
+vector 44 Net.hostB.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr source transmissionStateChanged
+attr title "Radio transmission state, vector"
+vector 45 Net.hostB.tcp tcpRcvQueueBytes ETV
+vector 46 Net.hostB.tcp "advertised window" ETV
+vector 47 Net.hostB.tcp "receive window" ETV
+vector 48 Net.hostB.tcp "sent ack" ETV
+vector 49 Net.hostR[2].wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr source transmissionStateChanged
+attr title "Radio transmission state, vector"
+vector 50 Net.hostR[3].wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr source transmissionStateChanged
+attr title "Radio transmission state, vector"
+42	11370 73 26 3975 0 45 5 7504 7504 37520 281550080
+41	11443 73 26 3975 0 45 5 7504 7504 37520 281550080
+43	11516 58 26 3975 0 45 5 0 0 0 0
+40	11574 58 26 3975 0 45 5 0 0 0 0
+vector 51 Net.hostB.tcp tcpRcvQueueBytes ETV
+vector 52 Net.hostB.tcp "advertised window" ETV
+vector 53 Net.hostB.tcp "receive window" ETV
+vector 54 Net.hostB.tcp "sent ack" ETV
+47	11809 75 165 4263 1 46 5 7504 7504 37520 281550080
+46	11884 75 165 4263 1 46 5 7504 7504 37520 281550080
+48	11959 60 165 4263 1 46 5 0 0 0 0
+45	12019 60 165 4263 1 46 5 0 0 0 0
+vector 55 Net.hostB.tcp tcpRcvQueueBytes ETV
+vector 56 Net.hostB.tcp "advertised window" ETV
+vector 57 Net.hostB.tcp "receive window" ETV
+vector 58 Net.hostB.tcp "sent ack" ETV
+0	12256 10 0 0 0 0 1 nan nan nan nan
+1	12266 36 0 0 0 0 4 0 0.002 0.002 4e-06
+2	12302 2880 0 7690 0 82.365937863725 109 nan nan nan nan
+3	15182 9694 0 7690 0 82.365937863725 364 0 0.1 3.062 0.243724
+4	24876 10 0 0 0 0 1 nan nan nan nan
+5	24886 36 0 0 0 0 4 0 0.002 0.002 4e-06
+6	24922 10 0 0 0 0 1 nan nan nan nan
+7	24932 36 0 0 0 0 4 0 0.002 0.002 4e-06
+8	24968 1730 0 7131 0 76.44291030529 65 nan nan nan nan
+9	26698 6130 0 7131 0 76.44291030529 228 0 0.1 1.986 0.162052
+10	32828 1575 0 7689 0 82.365937687373 57 nan nan nan nan
+11	34403 5584 0 7689 0 82.365937687373 200 0 0.1 1.738 0.141796
+12	39987 11 0 0 0 0 1 nan nan nan nan
+13	39998 40 0 0 0 0 4 0 0.002 0.002 4e-06
+14	40038 18 0 0 0 0 2 0 2 2 4
+15	40056 31 0 0 0 0 3 0 0.002 0.002 4e-06
+16	40087 1230 0 7668 0 82.363675864812 50 0 3 122 316
+17	41317 10049 0 7690 0 82.365937863725 363 0 0.1 3.062 0.243724
+18	51366 9 0 0 0 0 1 0 0 0 0
+19	51375 9 0 0 0 0 1 0 0 0 0
+20	51384 9 0 0 0 0 1 0 0 0 0
+21	51393 18 0 0 0 0 2 0 2 2 4
+22	51411 31 0 0 0 0 3 0 0.002 0.002 4e-06
+23	51442 18 0 0 0 0 2 0 2 2 4
+24	51460 31 0 0 0 0 3 0 0.002 0.002 4e-06
+25	51491 844 0 7131 0 76.44291030529 34 0 3 82 212
+26	52335 6349 0 7131 0 76.44291030529 227 0 0.1 1.986 0.162052
+27	58684 744 0 7689 0 82.365937687373 30 0 3 72 186
+28	59428 5575 0 7689 0 82.365937687373 199 0 0.1 1.738 0.141796
+29	65003 18 0 0 0 0 2 0 2 2 4
+30	65021 31 0 0 0 0 3 0 0.002 0.002 4e-06
+31	65052 9 0 0 0 0 1 1 1 1 1
+32	65061 2771 0 7690 0 82.365937863725 109 0 3 145 325
+33	67832 9 0 0 0 0 1 1 1 1 1
+34	67841 9 0 0 0 0 1 1 1 1 1
+35	67850 1665 0 7131 0 76.44291030529 65 0 3 81 177
+36	69515 1461 0 7689 0 82.365937687373 57 0 3 71 155
+37	70976 9 0 0 0 0 1 1 1 1 1
+38	70985 47 25 7040 0 76 4 0 0 0 0
+39	71032 47 25 7040 0 76 4 1 4 10 30
+44	71079 2424 31 7668 0.000726401758 82.363675864812 96 0 2 96 144
+49	73503 1652 1814 7131 21.001644829908 76.44291030529 64 0 2 64 96
+50	75155 1452 2361 7689 25.407720934024 82.365937687373 56 0 2 56 84
+51	76607 39 6748 7822 75 84 3 0 0 0 0
+52	76646 48 6748 7822 75 84 3 7504 7504 22512 168930048
+53	76694 48 6748 7822 75 84 3 7504 7504 22512 168930048
+54	76742 39 6748 7822 75 84 3 0 0 0 0
+55	76781 39 7041 7903 76 85 3 0 0 0 0
+56	76820 48 7041 7903 76 85 3 7504 7504 22512 168930048
+57	76868 48 7041 7903 76 85 3 7504 7504 22512 168930048
+58	76916 39 7041 7903 76 85 3 0 0 0 0
+

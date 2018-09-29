@@ -1,0 +1,4 @@
+#!/bin/sh
+cd `dirname $0`
+../src/vanet_dash_v_0_1 -n .:../src $*
+# for shared lib, use: opp_run -l ../src/vanet_dash_v_0_1 -n .:../src $*
