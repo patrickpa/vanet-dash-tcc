@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for vanet-dash-v.0.1
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -KINET_PROJ=../../inet -KVEINS_PROJ=/home/patrick/veins-veins-4.7.1 -KVEINS_INET_PROJ=/home/patrick/veins-veins-4.7.1/subprojects/veins_inet -DINET_IMPORT -I$$\(INET_PROJ\)/src -I$$\(VEINS_PROJ\)/src -I. -L$$\(INET_PROJ\)/src -L$$\(VEINS_PROJ\)/src -L$$\(VEINS_PROJ\)/subprojects/veins_inet/src -lINET$$\(D\) -lveins$$\(D\) -lveins_inet$$\(D\)
+#  opp_makemake -f --deep -KINET_PROJ=../../inet -KLTE_PROJ=../../lte -KVEINS_PROJ=/home/patrick/veins-veins-4.7.1 -KVEINS_INET_PROJ=/home/patrick/veins-veins-4.7.1/subprojects/veins_inet -DINET_IMPORT -I$$\(INET_PROJ\)/src -I$$\(LTE_PROJ\)/src -I$$\(VEINS_PROJ\)/src -I. -L$$\(INET_PROJ\)/src -L$$\(LTE_PROJ\)/src -L$$\(VEINS_PROJ\)/src -L$$\(VEINS_PROJ\)/subprojects/veins_inet/src -lINET$$\(D\) -llte$$\(D\) -lveins$$\(D\) -lveins_inet$$\(D\)
 #
 
 # Name of target to be created (-o option)
@@ -16,13 +16,13 @@ USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(TKENV_LIBS) $(QTENV_LIBS) $(CMDENV_LI
 #USERIF_LIBS = $(QTENV_LIBS)
 
 # C++ include paths (with -I)
-INCLUDE_PATH = -I$(INET_PROJ)/src -I$(VEINS_PROJ)/src -I.
+INCLUDE_PATH = -I$(INET_PROJ)/src -I$(LTE_PROJ)/src -I$(VEINS_PROJ)/src -I.
 
 # Additional object and library files to link with
 EXTRA_OBJS =
 
 # Additional libraries (-L, -l options)
-LIBS = $(LDFLAG_LIBPATH)$(INET_PROJ)/src $(LDFLAG_LIBPATH)$(VEINS_PROJ)/src $(LDFLAG_LIBPATH)$(VEINS_PROJ)/subprojects/veins_inet/src  -lINET$(D) -lveins$(D) -lveins_inet$(D)
+LIBS = $(LDFLAG_LIBPATH)$(INET_PROJ)/src $(LDFLAG_LIBPATH)$(LTE_PROJ)/src $(LDFLAG_LIBPATH)$(VEINS_PROJ)/src $(LDFLAG_LIBPATH)$(VEINS_PROJ)/subprojects/veins_inet/src  -lINET$(D) -llte$(D) -lveins$(D) -lveins_inet$(D)
 
 # Output directory
 PROJECT_OUTPUT_DIR = ../out
@@ -40,6 +40,7 @@ SMFILES =
 
 # Other makefile variables (-K)
 INET_PROJ=../../inet
+LTE_PROJ=../../lte
 VEINS_PROJ=/home/patrick/veins-veins-4.7.1
 VEINS_INET_PROJ=/home/patrick/veins-veins-4.7.1/subprojects/veins_inet
 
@@ -66,7 +67,7 @@ include $(CONFIGFILE)
 # Simulation kernel and user interface libraries
 OMNETPP_LIBS = $(OPPMAIN_LIB) $(USERIF_LIBS) $(KERNEL_LIBS) $(SYS_LIBS)
 ifneq ($(TOOLCHAIN_NAME),clangc2)
-LIBS += -Wl,-rpath,$(abspath $(INET_PROJ)/src) -Wl,-rpath,$(abspath $(VEINS_PROJ)/src) -Wl,-rpath,$(abspath $(VEINS_PROJ)/subprojects/veins_inet/src)
+LIBS += -Wl,-rpath,$(abspath $(INET_PROJ)/src) -Wl,-rpath,$(abspath $(LTE_PROJ)/src) -Wl,-rpath,$(abspath $(VEINS_PROJ)/src) -Wl,-rpath,$(abspath $(VEINS_PROJ)/subprojects/veins_inet/src)
 endif
 
 COPTS = $(CFLAGS) $(IMPORT_DEFINES) -DINET_IMPORT $(INCLUDE_PATH) -I$(OMNETPP_INCL_DIR)
