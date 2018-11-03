@@ -10,3 +10,4 @@ file '/home/patrick/omnetpp-5.3/samples/vanet-dash-v.0.1/video-scripts/vid_1/Bus
 file '/home/patrick/omnetpp-5.3/samples/vanet-dash-v.0.1/video-scripts/vid_1/BusyStreetScene_src720/9_BusyStreetScene_src720.mp4'
 file '/home/patrick/omnetpp-5.3/samples/vanet-dash-v.0.1/video-scripts/vid_1/BusyStreetScene_src720/10_BusyStreetScene_src720.mp4'
 file '/home/patrick/omnetpp-5.3/samples/vanet-dash-v.0.1/video-scripts/vid_1/BusyStreetScene_src720/11_BusyStreetScene_src720.mp4'
+file '/home/patrick/omnetpp-5.3/samples/vanet-dash-v.0.1/video-scripts/vid_1/BusyStreetScene_src720/12_BusyStreetScene_src720.mp4'

@@ -1,12 +1,16 @@
 import re
 import yaml
+import sys
 
-# in-line parameters #
-running_video = 'BusyStreetScene'
-video_len = 13
-vec_file_name = "/home/patrick/omnetpp-5.3/samples/vanet-dash-v.0.1/simulations/cars/results/DASH-numUEs=10-#0.vec"
-vid_sim_path = "./vid_1/SIM-RUNS/"
-######################
+# in-line parameters #######################
+
+running_video = sys.argv[1]
+video_len = int(sys.argv[2])
+vec_file_name = sys.argv[3]
+vid_sim_path = sys.argv[4]
+sim_parse_file = int(sys.argv[5])
+
+############################################
 
 file = open(vec_file_name, 'r')
 vec_log = file.read()
@@ -41,7 +45,7 @@ for frame_list in list_of_frames_qlt:
 
 dump = []
 
-count_sims = 1
+count_sims = 1 * sim_parse_file
 for l in final_list:
     sim_dic = {}
     sim_dic['Name'] = running_video
@@ -49,7 +53,6 @@ for l in final_list:
     sim_dic['Frames'] = []
 
     count_frames = 0
-
 
     for frame in final_list[l]:
         frame_qlt = ''
