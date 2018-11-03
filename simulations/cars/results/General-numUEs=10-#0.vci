@@ -1,0 +1,220 @@
+file 141611 1540087399                                          
+version 2
+run General-0-20181020-23:03:17-13250
+attr configname General
+attr datetime 20181020-23:03:17
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars $numUEs=10
+attr iterationvarsf numUEs=10-
+attr measurement $numUEs=10
+attr network vanet_dash_v_0_1.simulations.cars.Highway
+attr processid 13250
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+itervar numUEs 10
+param **.coreDebug false
+param *.playgroundSizeX 20000m
+param *.playgroundSizeY 20000m
+param *.playgroundSizeZ 50m
+param *.veinsManager.moduleType "\"lte.corenetwork.nodes.cars.Car\""
+param *.veinsManager.moduleName "\"car\""
+param *.veinsManager.moduleDisplayString "\"\""
+param *.veinsManager.launchConfig "xmldoc(\"square.launchd.xml\")"
+param *.veinsManager.updateInterval 0.1s
+param *.car[*].mobilityType "\"VeinsInetMobility\""
+param **.deployer.positionUpdateInterval 0.001s
+param *.car[*].configurator.mcastGroups "\"224.0.0.10\""
+param **.channelControl.pMax 10W
+param **.channelControl.alpha 1.0
+param **.channelControl.carrierFrequency 2100e+6Hz
+param **.lteNic.phy.channelModel "xmldoc(\"config_channel.xml\")"
+param **.feedbackComputation "xmldoc(\"config_channel.xml\")"
+param **.dynamicCellAssociation true
+param **.car[*].masterId 1
+param **.car[*].macCellId 1
+param **.eNodeB1.macCellId 1
+param **.eNodeB1.macNodeId 1
+param **.eNodeB2.macCellId 2
+param **.eNodeB2.macNodeId 2
+param **.eNodeBCount 2
+param **.rbAllocationType "\"localized\""
+param **.feedbackType "\"ALLBANDS\""
+param **.feedbackGeneratorType "\"IDEAL\""
+param **.maxHarqRtx 3
+param **.numUe 10
+param **.deployer.ruRange 50
+param **.deployer.ruTxPower "\"50,50,50;\""
+param **.deployer.antennaCws "\"2;\""
+param **.deployer.numRbDl 25
+param **.deployer.numRbUl 25
+param **.numBands 25
+param **.fbDelay 1
+param **.enableHandover true
+param **.broadcastMessageInterval 0.5s
+param *.eNodeB*.numX2Apps 1
+param *.eNodeB*.x2App[*].server.localPort "5000 + ancestorIndex(1)"
+param *.eNodeB1.x2App[0].client.connectAddress "\"eNodeB2%x2ppp0\""
+param *.eNodeB2.x2App[0].client.connectAddress "\"eNodeB1%x2ppp0\""
+param **.sctp.nagleEnabled false
+param **.sctp.enableHeartbeats false
+
+vector 0 Highway.server.ppp[0].queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 1 Highway.server.ppp[0].ppp txState:vector ETV
+attr interpolationmode sample-hold
+attr title "tx state, vector"
+vector 2 Highway.router.ppp[0].queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 3 Highway.router.ppp[0].ppp txState:vector ETV
+attr interpolationmode sample-hold
+attr title "tx state, vector"
+vector 4 Highway.router.ppp[1].queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 5 Highway.router.ppp[1].ppp txState:vector ETV
+attr interpolationmode sample-hold
+attr title "tx state, vector"
+vector 6 Highway.pgw.ppp[0].queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 7 Highway.pgw.ppp[0].ppp txState:vector ETV
+attr interpolationmode sample-hold
+attr title "tx state, vector"
+vector 8 Highway.pgw.ppp[1].queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 9 Highway.pgw.ppp[1].ppp txState:vector ETV
+attr interpolationmode sample-hold
+attr title "tx state, vector"
+vector 10 Highway.pgw.pppInterface.queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 11 Highway.pgw.pppInterface.ppp txState:vector ETV
+attr interpolationmode sample-hold
+attr title "tx state, vector"
+vector 12 Highway.eNodeB1.pppIf.queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 13 Highway.eNodeB1.pppIf.ppp txState:vector ETV
+attr interpolationmode sample-hold
+attr title "tx state, vector"
+vector 14 Highway.eNodeB1.x2ppp[0].queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 15 Highway.eNodeB1.x2ppp[0].ppp txState:vector ETV
+attr interpolationmode sample-hold
+attr title "tx state, vector"
+vector 16 Highway.eNodeB2.pppIf.queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 17 Highway.eNodeB2.pppIf.ppp txState:vector ETV
+attr interpolationmode sample-hold
+attr title "tx state, vector"
+vector 18 Highway.eNodeB2.x2ppp[0].queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 19 Highway.eNodeB2.x2ppp[0].ppp txState:vector ETV
+attr interpolationmode sample-hold
+attr title "tx state, vector"
+vector 20 Highway.eNodeB1.x2ppp[0].queue rcvdPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "received packets, vector(packetBytes)"
+vector 21 Highway.eNodeB1.x2ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr title "queueing time, vector"
+vector 22 Highway.eNodeB2.x2ppp[0].queue rcvdPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "received packets, vector(packetBytes)"
+vector 23 Highway.eNodeB2.x2ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr title "queueing time, vector"
+vector 24 Highway.eNodeB1.x2ppp[0].ppp rcvdPkFromHL:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, vector(packetBytes)"
+vector 25 Highway.eNodeB1.x2ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSentToLower
+attr title "packets transmitted, vector(packetBytes)"
+vector 26 Highway.eNodeB2.x2ppp[0].ppp rcvdPkFromHL:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, vector(packetBytes)"
+vector 27 Highway.eNodeB2.x2ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSentToLower
+attr title "packets transmitted, vector(packetBytes)"
+vector 28 Highway.eNodeB2.x2ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source rxPkOk
+attr title "packets received OK, vector(packetBytes)"
+vector 29 Highway.eNodeB2.x2ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSentToUpper
+attr title "packets passed to higher layer, vector(packetBytes)"
+vector 30 Highway.eNodeB1.x2ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source rxPkOk
+attr title "packets received OK, vector(packetBytes)"
+vector 31 Highway.eNodeB1.x2ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSentToUpper
+attr title "packets passed to higher layer, vector(packetBytes)"
+vector 32 Highway.car[0].lteNic.phy servingCell:vector ETV
+attr source servingCell
+attr title "ID of the serving eNodeB for the UE, vector"
+attr unit ""
+vector 33 Highway.eNodeB1.lteNic.mac receivedPacketFromLowerLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr source receivedPacketFromLowerLayer
+vector 34 Highway.car[1].lteNic.phy servingCell:vector ETV
+attr source servingCell
+attr title "ID of the serving eNodeB for the UE, vector"
+attr unit ""
+vector 35 Highway.car[2].lteNic.phy servingCell:vector ETV
+attr source servingCell
+attr title "ID of the serving eNodeB for the UE, vector"
+attr unit ""
+32	7373 13 498 498 0.1 0.1 1 1 1 1 1
+34	7386 15 28943 28943 5.1 5.1 1 1 1 1 1
+35	7401 16 65742 65742 10.1 10.1 1 1 1 1 1
+0	7417 8 0 0 0 0 1 0 0 0 0
+1	7425 8 0 0 0 0 1 0 0 0 0
+2	7433 8 0 0 0 0 1 0 0 0 0
+3	7441 8 0 0 0 0 1 0 0 0 0
+4	7449 8 0 0 0 0 1 0 0 0 0
+5	7457 8 0 0 0 0 1 0 0 0 0
+6	7465 8 0 0 0 0 1 0 0 0 0
+7	7473 8 0 0 0 0 1 0 0 0 0
+8	7481 8 0 0 0 0 1 0 0 0 0
+9	7489 8 0 0 0 0 1 0 0 0 0
+10	7497 9 0 0 0 0 1 0 0 0 0
+11	7506 9 0 0 0 0 1 0 0 0 0
+12	7515 9 0 0 0 0 1 0 0 0 0
+13	7524 9 0 0 0 0 1 0 0 0 0
+14	7533 9 0 0 0 0 1 0 0 0 0
+15	7542 164 0 93 0 0.0000004924 9 0 1 4 4
+16	7706 9 0 0 0 0 1 0 0 0 0
+17	7715 9 0 0 0 0 1 0 0 0 0
+18	7724 9 0 0 0 0 1 0 0 0 0
+19	7733 164 0 92 0 0.0000004924 9 0 1 4 4
+20	7897 78 42 89 0 0.000000458 4 36 164 400 48704
+21	7975 72 42 89 0 0.000000458 4 0 0 0 0
+22	8047 78 43 88 0 0.000000458 4 36 164 400 48704
+23	8125 72 43 88 0 0.000000458 4 0 0 0 0
+24	8197 78 44 91 0 0.000000458 4 36 164 400 48704
+25	8275 78 44 91 0 0.000000458 4 43 171 428 54500
+26	8353 78 45 90 0 0.000000458 4 36 164 400 48704
+27	8431 78 45 90 0 0.000000458 4 43 171 428 54500
+28	8509 89 50 95 0.0000001228 0.0000005424 4 43 171 428 54500
+29	8598 89 50 95 0.0000001228 0.0000005424 4 36 164 400 48704
+30	8687 89 51 94 0.0000001228 0.0000005424 4 43 171 428 54500
+31	8776 89 51 94 0.0000001228 0.0000005424 4 36 164 400 48704
+33	8865 132745 518 155144 0.102 20 7451 0 0 0 0
+

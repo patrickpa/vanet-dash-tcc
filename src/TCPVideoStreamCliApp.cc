@@ -7,6 +7,8 @@
  */
 
 #include "TCPVideoStreamCliApp.h"
+#include <iostream>
+#include <fstream>
 #include "inet/applications/tcpapp/GenericAppMsg_m.h"
 
 
@@ -34,6 +36,7 @@ TCPVideoStreamCliApp::TCPVideoStreamCliApp() {
 
 
 void TCPVideoStreamCliApp::initialize(int stage) {
+    EV_INFO << "initializing DASH\n";
     TCPBasicClientApp::initialize(stage);
     if (stage != 3)
         return;
@@ -81,12 +84,12 @@ void TCPVideoStreamCliApp::initialize(int stage) {
     timeoutMsg = new cMessage("timer");
     timeoutMsg->setKind(MSGKIND_CONNECT);
     //scheduleAt(startTime, timeoutMsg);
-    EV<< "start time: " << video_startTime << "\n";
+    EV_INFO << "start time: " << video_startTime << "\n";
     scheduleAt(simTime()+(simtime_t)video_startTime, timeoutMsg);
 }
 
 void TCPVideoStreamCliApp::sendRequest() {
-    EV<< "sending request, " << numRequestsToSend-1 << " more to go\n";
+    EV_INFO << "sending request, " << numRequestsToSend-1 << " more to go\n";
 
     // Request length
     long requestLength = par("requestLength");
@@ -102,7 +105,7 @@ void TCPVideoStreamCliApp::sendRequest() {
         tLastPacketRequested = simTime();
     } else {
         replyLength = manifest_size;
-        EV<< "sending manifest request\n";
+        EV_INFO << "sending manifest request\n";
     }
 
     msgsSent++;
@@ -117,9 +120,10 @@ void TCPVideoStreamCliApp::sendRequest() {
 }
 
 void TCPVideoStreamCliApp::handleTimer(cMessage *msg) {
+
     switch (msg->getKind()) {
     case MSGKIND_CONNECT:
-        EV<< "starting session\n";
+        EV_INFO << "starting session\n";
         emit(DASH_video_is_playing_signal, video_is_playing);
         connect(); // active OPEN
         break;
@@ -131,7 +135,9 @@ void TCPVideoStreamCliApp::handleTimer(cMessage *msg) {
         break;
 
         case MSGKIND_VIDEO_PLAY:
-            EV<< "---------------------> Video play event";
+
+            EV_INFO << "---------------------> Video play event\n";
+            EV_INFO << "---------------------> Qlty = " << video_packet_size_per_second[video_current_quality_index] << "\n";
             cancelAndDelete(msg);
             video_buffer--;
             emit(DASH_buffer_length_signal, video_buffer);
@@ -203,6 +209,12 @@ void TCPVideoStreamCliApp::socketDataArrived(int connId, void *ptr, cPacket *msg
     packetTimePointer = (packetTimePointer + 1) % packetTimeArrayLength;
     packetTime[packetTimePointer] = simTime() - tLastPacketRequested;
 
+    EV_INFO << "---------------------> Time && Qlty = " << (simTime() - tLastPacketRequested) << "   " << video_packet_size_per_second[video_current_quality_index] << "\n";
+
+    int recvd = video_packet_size_per_second[video_current_quality_index] / 8 * 1000;
+    msgsRcvd++;
+    bytesRcvd += recvd;
+
     video_buffer++;
     emit(DASH_buffer_length_signal, video_buffer);
     // Update switch timer
@@ -215,6 +227,7 @@ void TCPVideoStreamCliApp::socketDataArrived(int connId, void *ptr, cPacket *msg
     }
     // Full buffer
     if (video_buffer == video_buffer_max_length) {
+        video_buffer = 0;
         video_is_buffering = false;
         // switch to higher quality (if possible)
         if (can_switch) {
@@ -224,8 +237,8 @@ void TCPVideoStreamCliApp::socketDataArrived(int connId, void *ptr, cPacket *msg
                 tSum = tSum + packetTime[i];
             }
             double estimatedBitRate = (packetTimeArrayLength * video_packet_size_per_second[video_current_quality_index]) / tSum;
-            EV<< "---------------------> Bit rate estimation:\n";
-            EV<< "---------------------> Estimated bit rate = " << estimatedBitRate << "\n";
+            EV_INFO << "---------------------> Bit rate estimation:\n";
+            EV_INFO << "---------------------> Estimated bit rate = " << estimatedBitRate << "\n";
             int qmax = video_packet_size_per_second.size() -1;
             if (estimatedBitRate > video_packet_size_per_second[std::min(video_current_quality_index + 1, qmax)]) {
                 video_current_quality_index = std::min(video_current_quality_index + 1, qmax);
@@ -235,7 +248,7 @@ void TCPVideoStreamCliApp::socketDataArrived(int connId, void *ptr, cPacket *msg
         // the next video fragment will be requested when the buffer gets some space, so nothing to do here.
         return;
     }
-    EV<< "---------------------> Buffer=" << video_buffer << "    min= " << video_buffer_min_rebuffering << "\n";
+    EV_INFO << "---------------------> Buffer=" << video_buffer << "    min= " << video_buffer_min_rebuffering << "\n";
     // Exit rebuffering state and continue the video playback
     if (video_buffer > video_buffer_min_rebuffering || (numRequestsToSend == 0 && video_playback_pointer < video_duration) ) {
         if (!video_is_playing) {
@@ -252,7 +265,7 @@ void TCPVideoStreamCliApp::socketDataArrived(int connId, void *ptr, cPacket *msg
     }
 
     if (numRequestsToSend > 0) {
-        EV<< "reply arrived\n";
+        EV_INFO << "reply arrived\n";
 
         if (timeoutMsg)
         {
@@ -260,13 +273,10 @@ void TCPVideoStreamCliApp::socketDataArrived(int connId, void *ptr, cPacket *msg
             simtime_t d = simTime();
             rescheduleOrDeleteTimer(d, MSGKIND_SEND);
         }
-        int recvd = video_packet_size_per_second[video_current_quality_index] / 8 * 1000;
-        msgsRcvd++;
-        bytesRcvd += recvd;
     }
     else
     {
-        EV << "reply to last request arrived, closing session\n";
+        EV_INFO << "reply to last request arrived, closing session\n";
         close();
     }
 }

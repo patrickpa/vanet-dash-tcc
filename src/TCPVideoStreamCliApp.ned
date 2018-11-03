@@ -57,7 +57,7 @@ simple TCPVideoStreamCliApp like ITCPApp {
         volatile double thinkTime @unit(s); // time gap between requests
         
         // Adaptive Video parameters
-        string 			video_packet_size_per_second @units(kbps)= default("480 1500 2000 4000 8000 12000"); // how many kbits are required for 1 second of video for each representation (quality levels)
+        string 			video_packet_size_per_second @units(kbps)=  default("400 800 1500"); // default("480 1500 2000 4000 8000 12000"); // how many kbits are required for 1 second of video for each representation (quality levels)
         int 			manifest_size @units(byte) = default(100000);
         int 			video_buffer_max_length @units(s) = default(10); // buffer max length in seconds
         int 			video_duration @units(s) = default(30); // video length in seconds

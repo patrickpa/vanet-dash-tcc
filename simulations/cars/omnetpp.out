@@ -1,0 +1,15 @@
+[Partial history, 385370 earlier entries already discarded]
+** Event #392049  t=12.29  Highway.car[0].tcpApp[0] (TCPVideoStreamCliApp, id=257)  on data (inet::GenericAppMsg, id=668121)
+
+INFO (TCPVideoStreamCliApp)Highway.car[0].tcpApp[0]: reply arrived
+INFO (TCPVideoStreamCliApp)Highway.car[0].tcpApp[0]: ---------------------> Time && Qlty = 0.389   1500
+** Event #439836  t=13.29  Highway.car[0].tcpApp[0] (TCPVideoStreamCliApp, id=257)  on selfmsg timer (omnetpp::cMessage, id=827)
+
+INFO (TCPVideoStreamCliApp)Highway.car[0].tcpApp[0]: sending request, 990 more to go
+** Event #467764  t=13.679  Highway.car[0].tcpApp[0] (TCPVideoStreamCliApp, id=257)  on data (inet::GenericAppMsg, id=803386)
+
+INFO (TCPVideoStreamCliApp)Highway.car[0].tcpApp[0]: reply arrived
+INFO (TCPVideoStreamCliApp)Highway.car[0].tcpApp[0]: ---------------------> Time && Qlty = 0.389   1500
+INFO (TCPVideoStreamCliApp)Highway.car[0].tcpApp[0]: ---------------------> Bit rate estimation:
+INFO (TCPVideoStreamCliApp)Highway.car[0].tcpApp[0]: ---------------------> Estimated bit rate = 3705.53
+

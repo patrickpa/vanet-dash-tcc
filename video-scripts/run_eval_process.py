@@ -40,6 +40,8 @@ def create_result_frame_list(load_sim, video_name, folder):
 
    sim_nr = load_sim['Sim_Number']
 
+   frame_count = 0
+
    for frame in load_sim['Frames']:
 
       frame_qlt = frame.split('_')[1]
@@ -92,6 +94,7 @@ def main():
          sim_nr = load_sim['Sim_Number']
 
          frame_list_file = create_result_frame_list(load_sim, video_name, folder)
+         print(frame_list_file)
 
          if frame_list_file != "":
 
