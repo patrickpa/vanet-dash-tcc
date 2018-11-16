@@ -1,0 +1,10 @@
+end_to_end_delay mean/stddev 2:
+  mean: 2.58944086984
+  stddev: 4.76767438794
+pk_loss mean 2:
+  mean: 0.0307692307692
+end_to_end_delay mean/stddev 2:
+  mean: 3.74199071634
+  stddev: 4.1359751076
+pk_loss mean 2:
+  mean: -0.0125

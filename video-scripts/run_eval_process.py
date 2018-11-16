@@ -63,8 +63,8 @@ def create_result_frame_list(load_sim, video_name, folder):
 
 def create_result_video(frame_list_file, video_name, sim_nr, folder):
 
-   command = "ffmpeg -f concat -safe 0 -i {} -c copy {}{}_SIM-{}-output.mp4".format(frame_list_file, folder, video_name, sim_nr)
-
+   command = "ffmpeg -f concat -y -safe 0 -i {} -c copy {}{}_SIM-{}-output.mp4".format(frame_list_file, folder, video_name, sim_nr)
+   
    subprocess.call(command, shell=True) 
 
 def main():

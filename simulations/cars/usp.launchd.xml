@@ -1,0 +1,7 @@
+<launch>
+  <copy file="usp.net.xml"/>
+  <copy file="usp.rou.xml"/>
+  <copy file="usp.poly.xml" />
+  <copy file="usp.sumocfg" type="config"/>
+  <copy file="gui-settings.xml"/>
+</launch>
