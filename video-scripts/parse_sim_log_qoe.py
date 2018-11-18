@@ -120,10 +120,11 @@ for l in final_list:
                 delay_sum += 0.0
                 all_delays.append(0.0)
 
-            if time in bitrate_time_dict:
-                bitrate_time_dict[time] = (bitrate_time_dict[time] + qlt_convert) / 2.0
+            r_time = round(float(time))
+            if r_time in bitrate_time_dict:
+                bitrate_time_dict[r_time] = (bitrate_time_dict[r_time] + qlt_convert) / 2.0
             else:
-                bitrate_time_dict[time] = qlt_convert
+                bitrate_time_dict[r_time] = qlt_convert
 
             frame_zero_time = time
 
@@ -242,10 +243,11 @@ for l in buffer_list:
         size_sum += size
         all_szs.append(size)
 
-        if time in buffer_time_dict:
-            buffer_time_dict[time] = (buffer_time_dict[time] + size) / 2.0
+        r_time = round(time)
+        if r_time in buffer_time_dict:
+            buffer_time_dict[r_time] = (buffer_time_dict[r_time] + size) / 2.0
         else:
-            buffer_time_dict[time] = size
+            buffer_time_dict[r_time] = size
 
     size_mean = size_sum/count_buffs
 
