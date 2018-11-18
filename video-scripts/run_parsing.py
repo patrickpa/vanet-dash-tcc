@@ -14,6 +14,10 @@ file_med_qlt_frame = "med_qlt_frame.yaml"
 med_qlt_frame = open(file_med_qlt_frame, 'w')
 med_qlt_frame.close()
 
+file_med_buffersize = "med_buffersize.yaml"
+med_buffersize_file = open(file_med_buffersize, 'w')
+med_buffersize_file.close()
+
 file_med_qos_metrics = "med_qos_metrics.yaml"
 med_qos_metrics = open(file_med_qos_metrics, 'w')
 med_qos_metrics.close()
@@ -29,6 +33,13 @@ for video_n in video_dict:
     plot_bitrate_time.close()
     yaml_final_bitrate_time.close()
 
+    file_buffersize_aux = "buffersize_time_aux_{}.yaml".format(video_n)
+    yaml_final_buffersize_time = open(file_buffersize_aux, 'w')
+    file_plot_buffersize_time = "buffersize_time_{}.csv".format(video_n)
+    plot_buffersize_time = open(file_plot_buffersize_time, 'w')
+    plot_buffersize_time.close()
+    yaml_final_buffersize_time.close()
+
     video = video_n
     video_len = video_dict[video_n][1]
     vid_sim_path = video_dict[video_n][0]
@@ -43,6 +54,7 @@ for video_n in video_dict:
 
     print("All QOE {} sim(s) parsed.".format(sim_parse_file))
 
+    ## Bitrate plotting part
     file_bitrate_time_aux = "bitrate_time_aux_{}.yaml".format(video)
     yaml_final_bitrate_time = open(file_bitrate_time_aux, 'r')
     file_plot_bitrate_time = "bitrate_time_{}.csv".format(video)
@@ -57,6 +69,25 @@ for video_n in video_dict:
 
     plot_bitrate_time.close()
     yaml_final_bitrate_time.close()
+    #####################################################################
+
+    ## Buffersize plotting part
+    file_buffersize_time_aux = "buffersize_time_aux_{}.yaml".format(video)
+    yaml_final_buffersize_time = open(file_buffersize_time_aux, 'r')
+    file_buffersize_time = "buffersize_time_{}.csv".format(video)
+    plot_buffersize_time = open(file_buffersize_time, 'w')
+
+    buffersize_time_dict = yaml.load(yaml_final_buffersize_time)
+
+    plot_buffersize_time.write("time; buffersize_mean;\n")
+    for time in buffersize_time_dict:
+        to_write = "{}; {};\n".format(time, buffersize_time_dict[time])
+        plot_buffersize_time.write(to_write)
+
+    plot_buffersize_time.close()
+    yaml_final_buffersize_time.close()
+    #####################################################################
+
 
 #Analise de QoS
 folder_qos = "/home/patrick/omnetpp-5.3/samples/vanet-dash-v.0.1/simulations/cars/"
