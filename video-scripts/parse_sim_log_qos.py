@@ -2,6 +2,7 @@ import re
 import yaml
 import sys
 import glob
+import math
 
 # in-line parameters #######################
 
@@ -20,8 +21,8 @@ file.close()
 file_med_qos_metrics = "med_qos_metrics.yaml"
 med_qos_metrics = open(file_med_qos_metrics, 'a')
 
-# m = re.compile(r"statistic Highway_AE\.car\[[0-9]\]\.tcpApp\[[0-9]\] endToEndDelay:histogram\nfield count [0-9]+\nfield mean [0-9]+\.[0-9]+\nfield stddev [0-9]+\.[0-9]+\n")
-m = re.compile(r"statistic Highway_USP\.car\[[0-9]\]\.tcpApp\[[0-9]\] endToEndDelay:histogram\nfield count [0-9]+\nfield mean [0-9]+\.[0-9]+\nfield stddev [0-9]+\.[0-9]+\n")
+m = re.compile(r"statistic Highway_AE\.car\[[0-9]\]\.tcpApp\[[0-9]\] endToEndDelay:histogram\nfield count [0-9]+\nfield mean [0-9]+\.[0-9]+\nfield stddev [0-9]+\.[0-9]+\n")
+# m = re.compile(r"statistic Highway_USP\.car\[[0-9]\]\.tcpApp\[[0-9]\] endToEndDelay:histogram\nfield count [0-9]+\nfield mean [0-9]+\.[0-9]+\nfield stddev [0-9]+\.[0-9]+\n")
 all_vecs = m.findall(vec_log)
 
 vecs_sum = 0
@@ -47,12 +48,12 @@ output = "end_to_end_delay mean/stddev {}:\n  mean: {}\n  stddev: {}\n".format(s
 
 med_qos_metrics.write(output)
 
-# n = re.compile(r"scalar Highway_AE\.car\[[0-9]\]\.tcpApp\[[0-9]\] sentPk:count [0-9]+")
-n = re.compile(r"scalar Highway_USP\.car\[[0-9]\]\.tcpApp\[[0-9]\] sentPk:count [0-9]+")
+n = re.compile(r"scalar Highway_AE\.car\[[0-9]\]\.tcpApp\[[0-9]\] sentPk:count [0-9]+")
+# n = re.compile(r"scalar Highway_USP\.car\[[0-9]\]\.tcpApp\[[0-9]\] sentPk:count [0-9]+")
 all_sent = n.findall(vec_log)
 
-# m = re.compile(r"scalar Highway_AE\.car\[[0-9]\]\.tcpApp\[[0-9]\] rcvdPk:count [0-9]+")
-m = re.compile(r"scalar Highway_USP\.car\[[0-9]\]\.tcpApp\[[0-9]\] rcvdPk:count [0-9]+")
+m = re.compile(r"scalar Highway_AE\.car\[[0-9]\]\.tcpApp\[[0-9]\] rcvdPk:count [0-9]+")
+# m = re.compile(r"scalar Highway_USP\.car\[[0-9]\]\.tcpApp\[[0-9]\] rcvdPk:count [0-9]+")
 all_rcvd = m.findall(vec_log)
 
 sr_dif_total = 0.0
@@ -63,12 +64,26 @@ for v in all_sent:
 
     miss = (float(car_sent) - float(car_count)) / float(car_sent)
 
-    sr_dif_total = miss
+    sr_dif_total += miss
     car_count += 1
 
 sr_dif_total /= car_count
 
-output_pk_loss = "pk_loss mean {}:\n  mean: {}\n".format(sim_parse_file, sr_dif_total)
+stddev_pck_loss = 0.0
+car_count = 0
+
+for v in all_sent:
+    car_sent = v.split(' ')[3]
+    car_rcvd = all_rcvd[car_count].split(' ')[3]
+
+    miss = (float(car_sent) - float(car_count)) / float(car_sent)
+
+    stddev_pck_loss += (miss - sr_dif_total) * (miss - sr_dif_total)
+    car_count += 1
+
+stddev_pck_loss = math.sqrt(stddev_pck_loss / float(car_count))
+
+output_pk_loss = "pk_loss mean {}:\n  mean: {}\n  stddev: {}\n".format(sim_parse_file, sr_dif_total, stddev_pck_loss)
 med_qos_metrics.write(output_pk_loss)
 
 med_qos_metrics.close()

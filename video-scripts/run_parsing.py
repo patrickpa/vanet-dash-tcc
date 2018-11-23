@@ -6,7 +6,7 @@ import yaml
 video_dict = {"BusyStreetScene":["./vid_1/SIM-RUNS/", 13], "CarsStoping": ["./vid_2/SIM-RUNS/", 9]}
 
 folder = "/home/patrick/omnetpp-5.3/samples/vanet-dash-v.0.1/simulations/cars/"
-sim_runs_folder = folder + "results/General-*.vec"
+sim_runs_folder = folder + "results/General-10*.vec"
 
 
 # Apaga os arquivos de medias de output
@@ -102,3 +102,8 @@ for sim_file in glob.iglob(sim_runs_folder_qos):
 
 print("All QOS {} sim(s) parsed.".format(sim_parse_file))
 
+
+#Sumarize
+
+command = 'python final_metrics.py'
+print ('Running command: ' + command)

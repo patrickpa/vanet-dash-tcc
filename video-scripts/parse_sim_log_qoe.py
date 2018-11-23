@@ -20,8 +20,8 @@ file = open(vec_file_name, 'r')
 vec_log = file.read()
 file.close()
 # vector 32 Highway_USP.car[0].tcpApp[0] DASHBufferLength:vector ETV
-# m = re.compile(r"vector [0-9]+ Highway_AE\.car\[[0-9]\]\.tcpApp\[[0-9]\] DASHQualityLevel:vector ETV")
-m = re.compile(r"vector [0-9]+ Highway_USP\.car\[[0-9]\]\.tcpApp\[[0-9]\] DASHQualityLevel:vector ETV")
+m = re.compile(r"vector [0-9]+ Highway_AE\.car\[[0-9]\]\.tcpApp\[[0-9]\] DASHQualityLevel:vector ETV")
+# m = re.compile(r"vector [0-9]+ Highway_USP\.car\[[0-9]\]\.tcpApp\[[0-9]\] DASHQualityLevel:vector ETV")
 
 all_vecs = m.findall(vec_log)
 
@@ -183,7 +183,8 @@ for d in dump:
 
 
 ## Buffer metrics ##
-o = re.compile(r"vector [0-9]+ Highway_USP\.car\[[0-9]\]\.tcpApp\[[0-9]\] DASHBufferLength:vector ETV")
+o = re.compile(r"vector [0-9]+ Highway_AE\.car\[[0-9]\]\.tcpApp\[[0-9]\] DASHBufferLength:vector ETV")
+# o = re.compile(r"vector [0-9]+ Highway_USP\.car\[[0-9]\]\.tcpApp\[[0-9]\] DASHBufferLength:vector ETV")
 
 all_buffer_vecs = o.findall(vec_log)
 

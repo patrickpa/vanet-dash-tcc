@@ -1,0 +1,15 @@
+BufferSize:
+  mean: 3.1833552938781504
+  stddev: 1.9898482984082502
+Delay_Playback:
+  mean: 1.9086042384005526
+  stddev: 3.629203151651152
+Qlt:
+  mean: 403.84615384612505
+  stddev: 13.3234677505
+end_to_end_delay:
+  mean: 1.864131692358
+  stddev: 2.341825770774
+pck_loss:
+  mean: 0.5440789473684
+  stddev: 0.55
