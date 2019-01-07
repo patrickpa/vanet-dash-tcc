@@ -14,6 +14,8 @@ sim_parse_file = int(sys.argv[5])
 
 ############################################
 
+num_sim = 10
+
 file = open(vec_file_name, 'r')
 vec_log = file.read()
 file.close()
@@ -21,15 +23,15 @@ file.close()
 file_med_qos_metrics = "med_qos_metrics.yaml"
 med_qos_metrics = open(file_med_qos_metrics, 'a')
 
-m = re.compile(r"statistic Highway_AE\.car\[[0-9]\]\.tcpApp\[[0-9]\] endToEndDelay:histogram\nfield count [0-9]+\nfield mean [0-9]+\.[0-9]+\nfield stddev [0-9]+\.[0-9]+\n")
-# m = re.compile(r"statistic Highway_USP\.car\[[0-9]\]\.tcpApp\[[0-9]\] endToEndDelay:histogram\nfield count [0-9]+\nfield mean [0-9]+\.[0-9]+\nfield stddev [0-9]+\.[0-9]+\n")
+# m = re.compile(r"statistic Highway_AE\.car\[[0-9]\]\.tcpApp\[[0-9]\] endToEndDelay:histogram\nfield count [0-9]+\nfield mean [0-9]+\.[0-9]+\nfield stddev [0-9]+\.[0-9]+\n")
+m = re.compile(r"statistic Highway_USP\.car\[[0-9]\]\.tcpApp\[[0-9]\] endToEndDelay:histogram\nfield count [0-9]+\nfield mean [0-9]+\.[0-9]+\nfield stddev [0-9]+\.[0-9]+\n")
 all_vecs = m.findall(vec_log)
 
 vecs_sum = 0
 mean = 0
 stddev = 0
 
-for vec in all_vecs[:10]:
+for vec in all_vecs:
     vec_lines = vec.split('\n')
     vecs_sum += 1
 
@@ -48,12 +50,12 @@ output = "end_to_end_delay mean/stddev {}:\n  mean: {}\n  stddev: {}\n".format(s
 
 med_qos_metrics.write(output)
 
-n = re.compile(r"scalar Highway_AE\.car\[[0-9]\]\.tcpApp\[[0-9]\] sentPk:count [0-9]+")
-# n = re.compile(r"scalar Highway_USP\.car\[[0-9]\]\.tcpApp\[[0-9]\] sentPk:count [0-9]+")
+# n = re.compile(r"scalar Highway_AE\.car\[[0-9]\]\.tcpApp\[[0-9]\] sentPk:count [0-9]+")
+n = re.compile(r"scalar Highway_USP\.car\[[0-9]\]\.tcpApp\[[0-9]\] sentPk:count [0-9]+")
 all_sent = n.findall(vec_log)
 
-m = re.compile(r"scalar Highway_AE\.car\[[0-9]\]\.tcpApp\[[0-9]\] rcvdPk:count [0-9]+")
-# m = re.compile(r"scalar Highway_USP\.car\[[0-9]\]\.tcpApp\[[0-9]\] rcvdPk:count [0-9]+")
+#m = re.compile(r"scalar Highway_AE\.car\[[0-9]\]\.tcpApp\[[0-9]\] rcvdPk:count [0-9]+")
+m = re.compile(r"scalar Highway_USP\.car\[[0-9]\]\.tcpApp\[[0-9]\] rcvdPk:count [0-9]+")
 all_rcvd = m.findall(vec_log)
 
 sr_dif_total = 0.0
